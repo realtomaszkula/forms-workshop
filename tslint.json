@@ -1,6 +1,7 @@
 {
   "rulesDirectory": [
-    "codelyzer"
+    "codelyzer",
+    "tslint-config-prettier"
   ],
   "rules": {
     "arrow-return-shorthand": true,
