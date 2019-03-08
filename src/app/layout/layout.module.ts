@@ -9,10 +9,12 @@ import {
   MatToolbarModule
 } from '@angular/material';
 import { LayoutComponent } from './layout/layout.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [LayoutComponent],
   imports: [
+    RouterModule,
     CommonModule,
     CdkLayoutModule,
     MatToolbarModule,
