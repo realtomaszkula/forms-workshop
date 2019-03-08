@@ -4,6 +4,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
+import {
+  MatInputModule,
+  MatButtonModule,
+  MatSelectModule,
+  MatRadioModule,
+  MatCardModule
+} from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -11,7 +19,13 @@ import { LayoutModule } from './layout/layout.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    LayoutModule
+    LayoutModule,
+    MatInputModule,
+    MatButtonModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCardModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -17,6 +17,7 @@ import { map } from 'rxjs/operators';
       >
         <mat-toolbar>Menu</mat-toolbar>
         <mat-nav-list>
+          <a mat-list-item routerLink="/simple-form">Simple Form</a>
           <a mat-list-item routerLink="/custom-control">Custom Control</a>
         </mat-nav-list>
       </mat-sidenav>
@@ -31,7 +32,7 @@ import { map } from 'rxjs/operators';
           >
             <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
           </button>
-          <span>{{ title }}</span>
+          <span routerLink="//">{{ title }}</span>
         </mat-toolbar>
         <ng-content></ng-content>
       </mat-sidenav-content>
