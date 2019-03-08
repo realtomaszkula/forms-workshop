@@ -17,9 +17,7 @@ import { map } from 'rxjs/operators';
       >
         <mat-toolbar>Menu</mat-toolbar>
         <mat-nav-list>
-          <a mat-list-item href="#">Link 1</a>
-          <a mat-list-item href="#">Link 2</a>
-          <a mat-list-item href="#">Link 3</a>
+          <a mat-list-item routerLink="/custom-control">Custom Control</a>
         </mat-nav-list>
       </mat-sidenav>
       <mat-sidenav-content>
