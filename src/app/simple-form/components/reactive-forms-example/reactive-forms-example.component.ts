@@ -106,8 +106,12 @@ export class ReactiveFormsExampleComponent {
 
   form = new FormGroup({
     username: new FormControl('', { validators: [Validators.required] }),
-    password: new FormControl('', { validators: [Validators.required] }),
-    // password: new FormControl('', { validators: [Validators.required, (control) => ValidatePasswordComplexity(control, this.minPassLen)] }),
+    password: new FormControl('', {
+      validators: [
+        Validators.required,
+        control => ValidatePasswordComplexity(control, this.minPassLen)
+      ]
+    }),
     passwordConfirm: new FormControl('', { validators: [Validators.required] })
   });
 

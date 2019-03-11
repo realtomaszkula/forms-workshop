@@ -54,7 +54,6 @@ fdescribe('passwordValidator', () => {
 
     for (let i = 0; i < 10; i++) {
       control.setValue(`${i}`);
-      console.log(control.value);
       errors = ValidatePasswordComplexity(control, 4) as any;
       expect(errors).toBeTruthy();
       expect(errors.number).toBeFalsy();
@@ -73,7 +72,6 @@ fdescribe('passwordValidator', () => {
     for (let i = 0; i < allowedChars.length - 1; i++) {
       const w = allowedChars.charAt(i);
       control.setValue(w);
-      console.log(control.value);
       errors = ValidatePasswordComplexity(control, 4) as any;
       expect(errors.specialChar).toBeFalsy(`failed for character: ${w}`);
     }
