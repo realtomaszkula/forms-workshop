@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 export interface FormValue {
   username: string;
@@ -8,24 +7,25 @@ export interface FormValue {
 }
 
 @Component({
-  selector: 'app-reactive-forms-example',
+  selector: 'app-template-driven-forms-example',
   template: `
-    <form [formGroup]="form" (ngSubmit)="submitted.emit(form.value)">
+    <form #form="ngForm" (ngSubmit)="submitted.emit(form.value)">
       <mat-card>
         <mat-card-title>
-          Login Form (Reactive)
+          Login Form (Template Driven)
         </mat-card-title>
         <mat-form-field>
           <input
             matInput
             placeholder="Username"
             type="text"
-            formControlName="username"
+            [(ngModel)]="model.username"
+            name="username"
+            #username="ngModel"
+            required
             data-test="username-input"
           />
-          <mat-error
-            *ngIf="form.get('username').hasError('required')"
-            data-test="username-errors"
+          <mat-error *ngIf="username.invalid" data-test="username-errors"
             >Username is required</mat-error
           >
         </mat-form-field>
@@ -34,12 +34,13 @@ export interface FormValue {
             matInput
             placeholder="Password"
             type="password"
-            formControlName="password"
+            [(ngModel)]="model.password"
+            name="password"
+            #password
+            required
             data-test="password"
           />
-          <mat-error
-            *ngIf="form.get('password').hasError('required')"
-            data-test="password-errors"
+          <mat-error *ngIf="password.invalid" data-test="password-errors"
             >Password is required</mat-error
           >
         </mat-form-field>
@@ -48,11 +49,14 @@ export interface FormValue {
             matInput
             placeholder="Confirm Password"
             type="password"
-            formControlName="passwordConfirm"
+            [(ngModel)]="model.passwordConfirm"
+            name="passwordConfirm"
+            #passwordConfirm="ngModel"
+            required
             data-test="password-confirm"
           />
           <mat-error
-            *ngIf="form.get('passwordConfirm').hasError('required')"
+            *ngIf="password.invalid"
             data-test="password-confirm-errors"
             >Password Confirm is required</mat-error
           >
@@ -96,12 +100,12 @@ export interface FormValue {
     `
   ]
 })
-export class ReactiveFormsExampleComponent {
+export class TemplateDrivenFormsExampleComponent {
   @Output() submitted = new EventEmitter<FormValue>();
 
-  form = new FormGroup({
-    username: new FormControl('', { validators: [Validators.required] }),
-    password: new FormControl('', { validators: [Validators.required] }),
-    passwordConfirm: new FormControl('', { validators: [Validators.required] })
-  });
+  model: FormValue = {
+    username: '',
+    password: '',
+    passwordConfirm: ''
+  };
 }
