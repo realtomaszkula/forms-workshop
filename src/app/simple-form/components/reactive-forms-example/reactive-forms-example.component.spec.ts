@@ -7,7 +7,7 @@ import {
   ReactiveFormsExampleComponent
 } from './reactive-forms-example.component';
 
-fdescribe('ReactiveFormsExampleComponent', () => {
+describe('ReactiveFormsExampleComponent', () => {
   let component: ReactiveFormsExampleComponent;
   let fixture: ComponentFixture<ReactiveFormsExampleComponent>;
   let form: FormGroup;

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ValidatePasswordComplexity } from 'src/app/validators/password.validator';
 
 export interface FormValue {
   username: string;
@@ -40,8 +41,11 @@ export interface FormValue {
           <mat-error
             *ngIf="form.get('password').hasError('required')"
             data-test="password-errors"
-            >Password is required</mat-error
-          >
+            >Password is required
+          </mat-error>
+          <mat-error *ngIf="hasDetailedError()" data-test="password-errors">{{
+            detailedErrorMessage()
+          }}</mat-error>
         </mat-form-field>
         <mat-form-field>
           <input
@@ -98,10 +102,12 @@ export interface FormValue {
 })
 export class ReactiveFormsExampleComponent {
   @Output() submitted = new EventEmitter<FormValue>();
+  minPassLen = 8;
 
   form = new FormGroup({
     username: new FormControl('', { validators: [Validators.required] }),
     password: new FormControl('', { validators: [Validators.required] }),
+    // password: new FormControl('', { validators: [Validators.required, (control) => ValidatePasswordComplexity(control, this.minPassLen)] }),
     passwordConfirm: new FormControl('', { validators: [Validators.required] })
   });
 
@@ -111,5 +117,54 @@ export class ReactiveFormsExampleComponent {
     }
 
     this.submitted.emit(this.form.value);
+  }
+
+  hasDetailedError(): boolean {
+    const errors = this.form.get('password').errors;
+    if (!errors || (!errors.required && errors.length)) {
+      return true;
+    }
+
+    return (
+      errors.smallLetter ||
+      errors.capitalLetter ||
+      errors.number ||
+      errors.specialChar
+    );
+  }
+
+  detailedErrorMessage(): string {
+    const errors = this.form.get('password').errors;
+
+    if (!errors || errors.required) {
+      return '';
+    }
+
+    if (errors.length) {
+      return `Password must be at least ${this.minPassLen} characters long.`;
+    }
+
+    let msg = 'The password must have at least ';
+    let comma = false;
+    if (errors.smallLetter) {
+      msg += 'one small letter';
+      comma = true;
+    }
+
+    if (errors.capitalLetter) {
+      msg += (comma ? ',' : '') + ' one capital letter';
+      comma = true;
+    }
+
+    if (errors.number) {
+      msg += (comma ? ',' : '') + ' one number';
+      comma = true;
+    }
+
+    if (errors.specialChar) {
+      msg += (comma ? ' and ' : '') + ' one special character';
+      comma = true;
+    }
+    return comma ? msg : '';
   }
 }
