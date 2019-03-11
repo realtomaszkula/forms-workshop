@@ -6,6 +6,9 @@ import { Component } from '@angular/core';
     <app-reactive-forms-example
       (submitted)="onReactiveFormSubmit($event)"
     ></app-reactive-forms-example>
+    <app-template-driven-forms-example
+      (submitted)="onTemplateDrivenFormSubmit($event)"
+    ></app-template-driven-forms-example>
   `,
   styles: [
     `
@@ -16,7 +19,7 @@ import { Component } from '@angular/core';
 
       app-reactive-forms-example,
       app-template-driven-forms-example {
-        margin: 0 auto;
+        margin: 0 auto 16px;
         display: block;
         max-width: 640px;
       }
