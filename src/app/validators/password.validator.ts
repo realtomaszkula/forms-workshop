@@ -1,4 +1,10 @@
-import { AbstractControl } from '@angular/forms';
+import { AbstractControl, ValidatorFn } from '@angular/forms';
+
+export function passwordComplexity(minimalLength: number): ValidatorFn {
+  return (control: AbstractControl) => {
+    return ValidatePasswordComplexity(control, minimalLength);
+  };
+}
 
 export function ValidatePasswordComplexity(
   control: AbstractControl,

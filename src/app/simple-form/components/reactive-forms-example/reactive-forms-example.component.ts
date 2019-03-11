@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ValidatePasswordComplexity } from 'src/app/validators/password.validator';
+import {
+  ValidatePasswordComplexity,
+  passwordComplexity
+} from 'src/app/validators/password.validator';
 
 export interface FormValue {
   username: string;
@@ -107,10 +110,7 @@ export class ReactiveFormsExampleComponent {
   form = new FormGroup({
     username: new FormControl('', { validators: [Validators.required] }),
     password: new FormControl('', {
-      validators: [
-        Validators.required,
-        control => ValidatePasswordComplexity(control, this.minPassLen)
-      ]
+      validators: [Validators.required, passwordComplexity(this.minPassLen)]
     }),
     passwordConfirm: new FormControl('', { validators: [Validators.required] })
   });
