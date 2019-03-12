@@ -36,13 +36,14 @@ export interface FormValue {
             type="password"
             [(ngModel)]="model.password"
             name="password"
-            #password
+            #password="ngModel"
             required
+            appPasswordComplexity="8"
             data-test="password"
           />
-          <mat-error *ngIf="password.invalid" data-test="password-errors"
-            >Password is required</mat-error
-          >
+          <mat-error *ngIf="password.invalid" data-test="password-errors">
+            {{ errorMessage(password, 8) }}
+          </mat-error>
         </mat-form-field>
         <mat-form-field>
           <input
@@ -108,4 +109,37 @@ export class TemplateDrivenFormsExampleComponent {
     password: '',
     passwordConfirm: ''
   };
+
+  errorMessage(control, minLen: number = 4) {
+    if (control.hasError('required')) {
+      return 'Password is required';
+    }
+
+    if (control.hasError('length')) {
+      return `Password must be at least ${minLen} characters long`;
+    }
+
+    let msg = 'The password must have at least ';
+    let comma = false;
+    if (control.hasError('smallLetter')) {
+      msg += 'one small letter';
+      comma = true;
+    }
+
+    if (control.hasError('capitalLetter')) {
+      msg += (comma ? ',' : '') + ' one capital letter';
+      comma = true;
+    }
+
+    if (control.hasError('number')) {
+      msg += (comma ? ',' : '') + ' one number';
+      comma = true;
+    }
+
+    if (control.hasError('specialChar')) {
+      msg += (comma ? ' and ' : '') + ' one special character';
+      comma = true;
+    }
+    return comma ? msg : '';
+  }
 }
