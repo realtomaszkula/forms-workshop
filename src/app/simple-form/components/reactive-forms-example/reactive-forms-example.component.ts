@@ -14,7 +14,7 @@ export interface FormValue {
 @Component({
   selector: 'app-reactive-forms-example',
   template: `
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form [formGroup]="form" (ngSubmit)="submitted.emit(form.value)">
       <mat-card>
         <mat-card-title>
           Login Form (Reactive)

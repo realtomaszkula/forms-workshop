@@ -14,7 +14,7 @@ class HostComponent {
   ctrl = new FormControl();
 }
 
-fdescribe('SwitchCtrlComponent', () => {
+describe('SwitchCtrlComponent', () => {
   let host: HostComponent;
   let fixture: ComponentFixture<HostComponent>;
   const selectors = {
