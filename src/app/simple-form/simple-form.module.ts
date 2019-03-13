@@ -12,13 +12,15 @@ import { SimpleFormComponent } from './components/simple-form/simple-form.compon
 import { SimpleFormRoutingModule } from './simple-form-routing.module';
 import { TemplateDrivenFormsExampleComponent } from './components/template-driven-forms-example/template-driven-forms-example.component';
 import { PasswordComplexityDirective } from '../simple-form/directives/password-complexity.directive';
+import { PasswordsMatchDirective } from './directives/passwords-match.directive';
 
 @NgModule({
   declarations: [
     SimpleFormComponent,
     ReactiveFormsExampleComponent,
     TemplateDrivenFormsExampleComponent,
-    PasswordComplexityDirective
+    PasswordComplexityDirective,
+    PasswordsMatchDirective
   ],
   imports: [
     CommonModule,

@@ -1,4 +1,4 @@
-import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { AbstractControl, ValidatorFn, FormGroup } from '@angular/forms';
 
 export function passwordComplexity(minimalLength: number): ValidatorFn {
   return (control: AbstractControl) => {
@@ -33,6 +33,14 @@ export function ValidatePasswordComplexity(
   if (Object.keys(validationResult).length === 0) {
     return null;
   }
-
   return validationResult;
+}
+
+export function passwordMatchValidator(group: FormGroup) {
+  const password = group.get('password');
+  const confirmPassword = group.get('passwordConfirm');
+  if (password && confirmPassword && password.value === confirmPassword.value) {
+    return null;
+  }
+  return { passwordMatch: true };
 }
