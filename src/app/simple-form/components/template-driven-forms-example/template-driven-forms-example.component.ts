@@ -9,7 +9,11 @@ export interface FormValue {
 @Component({
   selector: 'app-template-driven-forms-example',
   template: `
-    <form #form="ngForm" (ngSubmit)="submitted.emit(form.value)">
+    <form
+      #form="ngForm"
+      (ngSubmit)="submitted.emit(form.value)"
+      appPasswordsMatch
+    >
       <mat-card>
         <mat-card-title>
           Login Form (Template Driven)
@@ -62,7 +66,10 @@ export interface FormValue {
             >Password Confirm is required</mat-error
           >
         </mat-form-field>
-
+        <mat-error
+          *ngIf="passwordConfirm.touched && form.hasError('passwordMatch')"
+          >Entered passwords does not match
+        </mat-error>
         <mat-card-content>
           <pre>{{ form.value | json }}</pre>
         </mat-card-content>

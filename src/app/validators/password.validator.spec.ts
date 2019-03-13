@@ -1,7 +1,10 @@
-import { ValidatePasswordComplexity } from './password.validator';
-import { FormControl } from '@angular/forms';
+import {
+  ValidatePasswordComplexity,
+  passwordMatchValidator
+} from './password.validator';
+import { FormControl, FormGroup } from '@angular/forms';
 
-fdescribe('passwordValidator', () => {
+fdescribe('passwordComplexityValidator', () => {
   let control: FormControl;
 
   beforeEach(() => {
@@ -75,5 +78,37 @@ fdescribe('passwordValidator', () => {
       errors = ValidatePasswordComplexity(control, 4) as any;
       expect(errors.specialChar).toBeFalsy(`failed for character: ${w}`);
     }
+  });
+});
+
+fdescribe('passwords match validator', () => {
+  let password: FormControl;
+  let passwordConfirm: FormControl;
+
+  let form: FormGroup;
+
+  beforeEach(() => {
+    password = new FormControl('abc');
+    passwordConfirm = new FormControl();
+
+    form = new FormGroup(
+      {
+        password: password,
+        passwordConfirm: passwordConfirm
+      },
+      { validators: [passwordMatchValidator] }
+    );
+  });
+
+  it('should return error when passwordConfirm does not match password', () => {
+    passwordConfirm.setValue('ab');
+    const errors = passwordMatchValidator(form);
+    expect(errors.passwordMatch).toBeTruthy(`passwords shaould not match!`);
+  });
+
+  it('should return null when passwordConfirm not match password', () => {
+    passwordConfirm.setValue('abc');
+    const errors = passwordMatchValidator(form);
+    expect(errors).toBeFalsy(`passwords shaould match!`);
   });
 });

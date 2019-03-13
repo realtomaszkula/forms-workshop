@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {
-  ValidatePasswordComplexity,
-  passwordComplexity
+  passwordComplexity,
+  passwordMatchValidator
 } from 'src/app/validators/password.validator';
 
 export interface FormValue {
@@ -46,9 +46,9 @@ export interface FormValue {
             data-test="password-errors"
             >Password is required
           </mat-error>
-          <mat-error *ngIf="hasDetailedError()" data-test="password-errors">{{
-            detailedErrorMessage()
-          }}</mat-error>
+          <mat-error *ngIf="hasDetailedError()" data-test="password-errors">
+            {{ detailedErrorMessage() }}
+          </mat-error>
         </mat-form-field>
         <mat-form-field>
           <input
@@ -61,10 +61,16 @@ export interface FormValue {
           <mat-error
             *ngIf="form.get('passwordConfirm').hasError('required')"
             data-test="password-confirm-errors"
-            >Password Confirm is required</mat-error
-          >
+            >Password Confirm is required
+          </mat-error>
         </mat-form-field>
-
+        <mat-error
+          *ngIf="
+            form.get('passwordConfirm').touched &&
+            form.hasError('passwordMatch')
+          "
+          >Entered passwords does not match
+        </mat-error>
         <mat-card-content>
           <pre>{{ form.value | json }}</pre>
         </mat-card-content>
@@ -107,13 +113,18 @@ export class ReactiveFormsExampleComponent {
   @Output() submitted = new EventEmitter<FormValue>();
   minPassLen = 8;
 
-  form = new FormGroup({
-    username: new FormControl('', { validators: [Validators.required] }),
-    password: new FormControl('', {
-      validators: [Validators.required, passwordComplexity(this.minPassLen)]
-    }),
-    passwordConfirm: new FormControl('', { validators: [Validators.required] })
-  });
+  form = new FormGroup(
+    {
+      username: new FormControl('', { validators: [Validators.required] }),
+      password: new FormControl('', {
+        validators: [Validators.required, passwordComplexity(this.minPassLen)]
+      }),
+      passwordConfirm: new FormControl('', {
+        validators: [Validators.required]
+      })
+    },
+    { validators: [passwordMatchValidator] }
+  );
 
   onSubmit() {
     if (!this.form.valid) {
