@@ -4,6 +4,11 @@ import {
   passwordComplexity,
   passwordMatchValidator
 } from 'src/app/validators/password.validator';
+import {
+  UniqueNameValidator,
+  validateUniqueName
+} from 'src/app/validators/username.validator';
+import { UsersService } from 'src/app/services/users.service';
 
 export interface FormValue {
   username: string;
@@ -31,6 +36,11 @@ export interface FormValue {
             *ngIf="form.get('username').hasError('required')"
             data-test="username-errors"
             >Username is required</mat-error
+          >
+          <mat-error
+            *ngIf="form.get('username').hasError('userExists')"
+            data-test="username-errors"
+            >Username is already used</mat-error
           >
         </mat-form-field>
         <mat-form-field>
@@ -113,9 +123,14 @@ export class ReactiveFormsExampleComponent {
   @Output() submitted = new EventEmitter<FormValue>();
   minPassLen = 8;
 
+  constructor(private usersService: UsersService) {}
+
   form = new FormGroup(
     {
-      username: new FormControl('', { validators: [Validators.required] }),
+      username: new FormControl('', {
+        validators: [Validators.required],
+        asyncValidators: [validateUniqueName(this.usersService)]
+      }),
       password: new FormControl('', {
         validators: [Validators.required, passwordComplexity(this.minPassLen)]
       }),

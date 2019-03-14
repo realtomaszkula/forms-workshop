@@ -13,6 +13,7 @@ import { SimpleFormRoutingModule } from './simple-form-routing.module';
 import { TemplateDrivenFormsExampleComponent } from './components/template-driven-forms-example/template-driven-forms-example.component';
 import { PasswordComplexityDirective } from '../simple-form/directives/password-complexity.directive';
 import { PasswordsMatchDirective } from './directives/passwords-match.directive';
+import { UniqueNameDirective } from './directives/unique-name.directive';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PasswordsMatchDirective } from './directives/passwords-match.directive'
     ReactiveFormsExampleComponent,
     TemplateDrivenFormsExampleComponent,
     PasswordComplexityDirective,
-    PasswordsMatchDirective
+    PasswordsMatchDirective,
+    UniqueNameDirective
   ],
   imports: [
     CommonModule,
