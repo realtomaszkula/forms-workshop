@@ -14,7 +14,6 @@ import { passwordMatchValidator } from 'src/app/validators/password.validator';
 })
 export class PasswordsMatchDirective implements Validator {
   validate(group: FormGroup) {
-    console.log('PasswordsMatchDirective called!', group);
     return passwordMatchValidator(group);
   }
 

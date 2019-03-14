@@ -27,10 +27,18 @@ export interface FormValue {
             name="username"
             #username="ngModel"
             required
+            appUniqueName
             data-test="username-input"
           />
-          <mat-error *ngIf="username.invalid" data-test="username-errors"
+          <mat-error
+            *ngIf="username.errors?.required"
+            data-test="username-errors"
             >Username is required</mat-error
+          >
+          <mat-error
+            *ngIf="username.hasError('userExists')"
+            data-test="username-errors"
+            >Username is already used</mat-error
           >
         </mat-form-field>
         <mat-form-field>
