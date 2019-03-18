@@ -1,7 +1,7 @@
 import { PasswordsMatchDirective } from './passwords-match.directive';
 import { FormGroup, FormControl } from '@angular/forms';
 
-fdescribe('PasswordsMatchDirective', () => {
+describe('PasswordsMatchDirective', () => {
   it('should create an instance', () => {
     const directive = new PasswordsMatchDirective();
     expect(directive).toBeTruthy();

@@ -19,6 +19,11 @@ import { map } from 'rxjs/operators';
         <mat-nav-list>
           <a mat-list-item routerLink="/simple-form">Simple Form</a>
           <a mat-list-item routerLink="/custom-control">Custom Control</a>
+          <a mat-list-item routerLink="/validations/custom"
+            >Custom Validation</a
+          >
+          <a mat-list-item routerLink="/validations/cross">Cross Validation</a>
+          <a mat-list-item routerLink="/validations/async">Async Validation</a>
         </mat-nav-list>
       </mat-sidenav>
       <mat-sidenav-content>

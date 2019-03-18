@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-template-driven-forms-example',
   template: `
     <mat-card>
-      <mat-card-title>With Template Driven Forms</mat-card-title>
+      <mat-card-title>Custom Control (Template)</mat-card-title>
       <mat-card-content>
         <app-switch-ctrl
           [(ngModel)]="value"

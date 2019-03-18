@@ -1,8 +1,8 @@
 import { FormControl } from '@angular/forms';
-import { validateUniqueName } from './username.validator';
+import { validateUniqueName } from './username-unique.validator';
 import { of, Observable } from 'rxjs';
 
-fdescribe('usernameValidator', () => {
+describe('usernameValidator', () => {
   const bob = 'bob';
   const alice = 'alice';
 

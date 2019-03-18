@@ -5,7 +5,7 @@ import { FormControl } from '@angular/forms';
   selector: 'app-reactive-forms-example',
   template: `
     <mat-card>
-      <mat-card-title>With Reactive Forms</mat-card-title>
+      <mat-card-title>Custom Control (Reactive)</mat-card-title>
       <mat-card-content>
         <app-switch-ctrl [formControl]="formControl"></app-switch-ctrl>
         <p>Value: {{ formControl.value }}</p>

@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path: 'custom-control',
     loadChildren: './custom-control/custom-control.module#CustomControlModule'
+  },
+  {
+    path: 'validations',
+    loadChildren: './validations/validations.module#ValidationsModule'
   }
 ];
 
