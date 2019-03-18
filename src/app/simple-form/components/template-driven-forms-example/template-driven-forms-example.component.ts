@@ -16,7 +16,7 @@ export interface FormValue {
     >
       <mat-card>
         <mat-card-title>
-          Login Form (Template Driven)
+          Login Form (Template)
         </mat-card-title>
         <mat-form-field>
           <input
@@ -30,15 +30,8 @@ export interface FormValue {
             appUniqueName
             data-test="username-input"
           />
-          <mat-error
-            *ngIf="username.errors?.required"
-            data-test="username-errors"
+          <mat-error *ngIf="username.invalid" data-test="username-errors"
             >Username is required</mat-error
-          >
-          <mat-error
-            *ngIf="username.hasError('userExists')"
-            data-test="username-errors"
-            >Username is already used</mat-error
           >
         </mat-form-field>
         <mat-form-field>
@@ -54,7 +47,7 @@ export interface FormValue {
             data-test="password"
           />
           <mat-error *ngIf="password.invalid" data-test="password-errors">
-            {{ errorMessage(password, 8) }}
+            Password is required
           </mat-error>
         </mat-form-field>
         <mat-form-field>
@@ -74,10 +67,6 @@ export interface FormValue {
             >Password Confirm is required</mat-error
           >
         </mat-form-field>
-        <mat-error
-          *ngIf="passwordConfirm.touched && form.hasError('passwordMatch')"
-          >Entered passwords does not match
-        </mat-error>
         <mat-card-content>
           <pre>{{ form.value | json }}</pre>
         </mat-card-content>
@@ -124,37 +113,4 @@ export class TemplateDrivenFormsExampleComponent {
     password: '',
     passwordConfirm: ''
   };
-
-  errorMessage(control, minLen: number = 4) {
-    if (control.hasError('required')) {
-      return 'Password is required';
-    }
-
-    if (control.hasError('length')) {
-      return `Password must be at least ${minLen} characters long`;
-    }
-
-    let msg = 'The password must have at least ';
-    let comma = false;
-    if (control.hasError('smallLetter')) {
-      msg += 'one small letter';
-      comma = true;
-    }
-
-    if (control.hasError('capitalLetter')) {
-      msg += (comma ? ',' : '') + ' one capital letter';
-      comma = true;
-    }
-
-    if (control.hasError('number')) {
-      msg += (comma ? ',' : '') + ' one number';
-      comma = true;
-    }
-
-    if (control.hasError('specialChar')) {
-      msg += (comma ? ' and ' : '') + ' one special character';
-      comma = true;
-    }
-    return comma ? msg : '';
-  }
 }

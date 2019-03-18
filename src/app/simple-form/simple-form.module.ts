@@ -11,18 +11,11 @@ import { ReactiveFormsExampleComponent } from './components/reactive-forms-examp
 import { SimpleFormComponent } from './components/simple-form/simple-form.component';
 import { SimpleFormRoutingModule } from './simple-form-routing.module';
 import { TemplateDrivenFormsExampleComponent } from './components/template-driven-forms-example/template-driven-forms-example.component';
-import { PasswordComplexityDirective } from '../simple-form/directives/password-complexity.directive';
-import { PasswordsMatchDirective } from './directives/passwords-match.directive';
-import { UniqueNameDirective } from './directives/unique-name.directive';
-
 @NgModule({
   declarations: [
     SimpleFormComponent,
     ReactiveFormsExampleComponent,
-    TemplateDrivenFormsExampleComponent,
-    PasswordComplexityDirective,
-    PasswordsMatchDirective,
-    UniqueNameDirective
+    TemplateDrivenFormsExampleComponent
   ],
   imports: [
     CommonModule,

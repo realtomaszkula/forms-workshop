@@ -9,22 +9,7 @@ import { Component } from '@angular/core';
     <app-template-driven-forms-example
       (submitted)="onTemplateDrivenFormSubmit($event)"
     ></app-template-driven-forms-example>
-  `,
-  styles: [
-    `
-      :host {
-        display: block;
-        padding: 16px;
-      }
-
-      app-reactive-forms-example,
-      app-template-driven-forms-example {
-        margin: 0 auto 16px;
-        display: block;
-        max-width: 640px;
-      }
-    `
-  ]
+  `
 })
 export class SimpleFormComponent {
   onReactiveFormSubmit(value: any) {

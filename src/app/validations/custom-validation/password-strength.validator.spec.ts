@@ -1,10 +1,10 @@
 import {
   ValidatePasswordComplexity,
   passwordMatchValidator
-} from './password.validator';
+} from './password-strength.validator';
 import { FormControl, FormGroup } from '@angular/forms';
 
-fdescribe('passwordComplexityValidator', () => {
+describe('passwordComplexityValidator', () => {
   let control: FormControl;
 
   beforeEach(() => {
@@ -81,7 +81,7 @@ fdescribe('passwordComplexityValidator', () => {
   });
 });
 
-fdescribe('passwords match validator', () => {
+describe('passwords match validator', () => {
   let password: FormControl;
   let passwordConfirm: FormControl;
 
