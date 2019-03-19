@@ -1,29 +1,26 @@
-import { PasswordsMatchDirective } from './passwords-match.directive';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
+import { passwordMatchValidator } from './passwords-match.validator';
 
-describe('PasswordsMatchDirective', () => {
-  it('should create an instance', () => {
-    const directive = new PasswordsMatchDirective();
-    expect(directive).toBeTruthy();
-  });
-  it('should return null when passwords match', () => {
-    const form = new FormGroup({
-      password: new FormControl('abc'),
-      passwordConfirm: new FormControl('abc')
-    });
-    const directive = new PasswordsMatchDirective();
-    const errors = directive.validate(form);
-    expect(errors).toBeNull();
-  });
+describe('passwordsMatchValidator', () => {
+  it('should validate', () => {
+    const form = new FormGroup(
+      {
+        password: new FormControl(),
+        passwordConfirm: new FormControl()
+      },
+      { validators: [passwordMatchValidator] }
+    );
 
-  it('should return errors when passwords does not match', () => {
-    const form = new FormGroup({
-      password: new FormControl('abc'),
-      passwordConfirm: new FormControl('ab')
-    });
-    const directive = new PasswordsMatchDirective();
-    const errors = directive.validate(form);
-    expect(errors).not.toBeNull();
-    expect(errors.passwordMatch).toBeTruthy();
+    form.get('password').setValue('a');
+    form.get('passwordConfirm').setValue('a');
+    expect(form.valid).toBe(true);
+
+    form.get('password').setValue('b');
+    form.get('passwordConfirm').setValue('a');
+    expect(form.valid).toBe(false);
+
+    form.get('password').setValue('a');
+    form.get('passwordConfirm').setValue('b');
+    expect(form.valid).toBe(false);
   });
 });

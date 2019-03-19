@@ -25,8 +25,8 @@ export class PasswordsMatchValidatorDirective implements Validator {
 export function passwordMatchValidator(group: AbstractControl) {
   const password = group.get('password');
   const confirmPassword = group.get('passwordConfirm');
-  if (password && confirmPassword && password.value === confirmPassword.value) {
-    return null;
-  }
-  return { passwordMatch: true };
+
+  return password && confirmPassword && password.value === confirmPassword.value
+    ? null
+    : { passwordMatch: true };
 }
