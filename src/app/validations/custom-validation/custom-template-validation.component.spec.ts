@@ -1,11 +1,5 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import {
-  async,
-  ComponentFixture,
-  TestBed,
-  fakeAsync,
-  tick
-} from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { CustomTemplateValidationComponent } from './custom-template-validation.component';
@@ -36,18 +30,19 @@ describe('CustomTemplateValidationComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should render errors', fakeAsync(() => {
+  it('should render errors', async () => {
     component.value = 'aaaAAA123#';
     // [(ngModel)] updates are async, see source
     // https://github.com/angular/angular/blob/4.1.0-rc.0/packages/forms/src/directives/ng_model.ts#L213-L214
     fixture.detectChanges();
-    tick();
+    await fixture.whenStable();
     fixture.detectChanges();
     expect(errors()).toBeNull();
+
     component.value = '';
     fixture.detectChanges();
-    tick();
+    await fixture.whenStable();
     fixture.detectChanges();
     expect(errors()).not.toBeNull();
-  }));
+  });
 });
