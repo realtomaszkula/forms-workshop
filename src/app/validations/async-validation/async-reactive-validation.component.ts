@@ -14,11 +14,12 @@ import { UniqueUsernameValidator } from './username-unique.validator';
           <mat-label>Username</mat-label>
           <input matInput [formControl]="ctrl" />
           <mat-spinner
-            *ngIf="ctrl.pending"
+            *ngIf="ctrl.touched && ctrl.pending"
             matSuffix
             diameter="24"
+            data-test="spinner"
           ></mat-spinner>
-          <mat-error *ngIf="ctrl.invalid">
+          <mat-error *ngIf="ctrl.touched && ctrl.invalid">
             Username is not unique
           </mat-error>
         </mat-form-field>

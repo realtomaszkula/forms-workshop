@@ -18,11 +18,11 @@ import { Component } from '@angular/core';
             appUniqueUsername
           />
           <mat-spinner
-            *ngIf="username.pending"
+            *ngIf="username.touched && username.pending"
             matSuffix
             diameter="24"
           ></mat-spinner>
-          <mat-error *ngIf="username.invalid">
+          <mat-error *ngIf="username.touched && username.invalid">
             Username is not unique
           </mat-error>
         </mat-form-field>

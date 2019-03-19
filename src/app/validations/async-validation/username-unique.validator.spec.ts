@@ -1,3 +1,0 @@
-describe('usernameValidator', () => {
-  it('TODO', () => {});
-});
