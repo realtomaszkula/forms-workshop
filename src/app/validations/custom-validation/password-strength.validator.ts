@@ -11,33 +11,38 @@ export interface PasswordStrengthConfig {
   minLength?: number;
 }
 
+export interface PasswordsStrengthErrors {
+  minLength: boolean;
+  smallLetter: boolean;
+  capitalLetter: boolean;
+  number: boolean;
+  specialChar: boolean;
+}
+
 export function passwordStrength({
   minLength = 8
 }: PasswordStrengthConfig = {}): ValidatorFn {
   return (control: AbstractControl) => {
     const value = control.value || '';
-    const validationResult = {};
+    const errors: Partial<PasswordsStrengthErrors> = {};
 
     if (minLength && value.length < minLength) {
-      validationResult['smallLetter'] = true;
+      errors.minLength = true;
     }
     if (!value.match('[a-z]+')) {
-      validationResult['smallLetter'] = true;
+      errors.smallLetter = true;
     }
     if (!value.match('[A-Z]+')) {
-      validationResult['capitalLetter'] = true;
+      errors.capitalLetter = true;
     }
     if (!value.match('[0-9]+')) {
-      validationResult['number'] = true;
+      errors.number = true;
     }
     if (!value.match('[-!?@#$%^&*()-+_=<>,.?;:|"\']+')) {
-      validationResult['specialChar'] = true;
+      errors.specialChar = true;
     }
 
-    if (Object.keys(validationResult).length === 0) {
-      return null;
-    }
-    return validationResult;
+    return Object.keys(errors).length ? errors : null;
   };
 }
 
