@@ -11,7 +11,7 @@ import { By } from '@angular/platform-browser';
 import { CustomTemplateValidationComponent } from './custom-template-validation.component';
 import { PasswordStrengthValidationDirective } from './password-strength.validator';
 
-fdescribe('CustomTemplateValidationComponent', () => {
+describe('CustomTemplateValidationComponent', () => {
   let component: CustomTemplateValidationComponent;
   let fixture: ComponentFixture<CustomTemplateValidationComponent>;
   const selectors = {

@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { CustomReactiveValidationComponent } from './custom-reactive-validation.component';
 
-fdescribe('CustomReactiveValidationComponent', () => {
+describe('CustomReactiveValidationComponent', () => {
   let component: CustomReactiveValidationComponent;
   let fixture: ComponentFixture<CustomReactiveValidationComponent>;
   const selectors = {

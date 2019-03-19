@@ -16,6 +16,7 @@ import { Component } from '@angular/core';
               [(ngModel)]="values.password"
               name="password"
               #password="ngModel"
+              data-test="password"
             />
           </mat-form-field>
           <mat-form-field appearance="outline">
@@ -25,6 +26,7 @@ import { Component } from '@angular/core';
               [(ngModel)]="values.passwordConfirm"
               name="passwordConfirm"
               #passwordConfirm="ngModel"
+              data-test="passwordConfirm"
             />
           </mat-form-field>
           <mat-error
@@ -33,6 +35,7 @@ import { Component } from '@angular/core';
               passwordConfirm.touched &&
               form.hasError('passwordMatch')
             "
+            data-test="errors"
           >
             Passwords must match
           </mat-error>

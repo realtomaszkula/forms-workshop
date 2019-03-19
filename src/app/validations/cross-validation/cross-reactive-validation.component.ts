@@ -12,11 +12,19 @@ import { passwordMatchValidator } from './passwords-match.validator';
       <mat-card-content [formGroup]="form">
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
-          <input matInput [formControl]="form.get('password')" />
+          <input
+            matInput
+            [formControl]="form.get('password')"
+            data-test="password"
+          />
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Password Confirm</mat-label>
-          <input matInput [formControl]="form.get('passwordConfirm')" />
+          <input
+            matInput
+            [formControl]="form.get('passwordConfirm')"
+            data-test="passwordConfirm"
+          />
         </mat-form-field>
       </mat-card-content>
       <mat-error
@@ -25,6 +33,7 @@ import { passwordMatchValidator } from './passwords-match.validator';
           form.get('passwordConfirm').touched &&
           form.hasError('passwordMatch')
         "
+        data-test="errors"
       >
         Passwords must match
       </mat-error>
