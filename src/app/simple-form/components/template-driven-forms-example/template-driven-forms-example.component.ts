@@ -43,7 +43,6 @@ export interface FormValue {
             name="password"
             #password="ngModel"
             required
-            appPasswordComplexity="8"
             data-test="password"
           />
           <mat-error *ngIf="password.invalid" data-test="password-errors">
@@ -62,7 +61,7 @@ export interface FormValue {
             data-test="password-confirm"
           />
           <mat-error
-            *ngIf="password.invalid"
+            *ngIf="passwordConfirm.invalid"
             data-test="password-confirm-errors"
             >Password Confirm is required</mat-error
           >
