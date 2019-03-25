@@ -58,15 +58,19 @@ describe('Simple Form (Template Driven)', () => {
       expect(ctrl().attributes['required']).toBe('');
     });
 
-    it('should render errors', () => {
+    it('should render errors', async () => {
+      fixture.detectChanges();
+      await fixture.whenStable();
       ctrl().nativeElement.value = 'woo';
       ctrl().nativeElement.dispatchEvent(new Event('input'));
       fixture.detectChanges();
+      await fixture.whenStable();
       expect(errors()).toBeNull();
       ctrl().nativeElement.value = null;
       ctrl().nativeElement.dispatchEvent(new Event('input'));
       fixture.detectChanges();
-      expect(errors()).toBeNull();
+      await fixture.whenStable();
+      expect(errors()).not.toBeNull();
     });
   });
   describe('password', () => {
@@ -82,17 +86,22 @@ describe('Simple Form (Template Driven)', () => {
       expect(ctrl().attributes['required']).toBe('');
     });
 
-    it('should render errors', () => {
+    it('should render errors', async () => {
+      fixture.detectChanges();
+      await fixture.whenStable();
       ctrl().nativeElement.value = 'woo';
       ctrl().nativeElement.dispatchEvent(new Event('input'));
       fixture.detectChanges();
+      await fixture.whenStable();
       expect(errors()).toBeNull();
       ctrl().nativeElement.value = null;
       ctrl().nativeElement.dispatchEvent(new Event('input'));
       fixture.detectChanges();
-      expect(errors()).toBeNull();
+      await fixture.whenStable();
+      expect(errors()).not.toBeNull();
     });
   });
+
   describe('passwordConfirm', () => {
     const ctrl = () =>
       fixture.debugElement.query(By.css(selectors.passwordConfirm.input));
@@ -106,15 +115,19 @@ describe('Simple Form (Template Driven)', () => {
       expect(ctrl().attributes['required']).toBe('');
     });
 
-    it('should render errors', () => {
+    it('should render errors', async () => {
+      fixture.detectChanges();
+      await fixture.whenStable();
       ctrl().nativeElement.value = 'woo';
       ctrl().nativeElement.dispatchEvent(new Event('input'));
       fixture.detectChanges();
+      await fixture.whenStable();
       expect(errors()).toBeNull();
       ctrl().nativeElement.value = null;
       ctrl().nativeElement.dispatchEvent(new Event('input'));
       fixture.detectChanges();
-      expect(errors()).toBeNull();
+      await fixture.whenStable();
+      expect(errors()).not.toBeNull();
     });
   });
 });
